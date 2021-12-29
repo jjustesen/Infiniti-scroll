@@ -16,7 +16,7 @@ interface Response {
 }
 
 //Simular get de uma Api
-function loadItems(startCursor = 0, search: string): Promise<Response> {
+const loadItems = (startCursor = 0, search: string): Promise<Response> => {
   return new Promise((resolve) => {
     let newArray: Item[] = [];
     let hasNextPage: boolean = true;
@@ -41,9 +41,9 @@ function loadItems(startCursor = 0, search: string): Promise<Response> {
       resolve({ hasNextPage: hasNextPage, data: newArray });
     }, RESPONSE_TIME_IN_MS);
   });
-}
+};
 
-export function useLoadItems() {
+export const useLoadItems = () => {
   const [loading, setLoading] = React.useState(false);
   const [items, setItems] = React.useState<Item[]>([]);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(true);
@@ -55,7 +55,7 @@ export function useLoadItems() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  async function loadMore() {
+  const loadMore = async () => {
     setLoading(true);
     try {
       const { data, hasNextPage: newHasNextPage } = await loadItems(
@@ -70,7 +70,7 @@ export function useLoadItems() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return { loading, items, hasNextPage, error, loadMore, setItems, setSearch };
-}
+};

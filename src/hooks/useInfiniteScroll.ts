@@ -24,14 +24,14 @@ export type UseInfiniteScrollHookArgs = Pick<
   delayInMs?: number;
 };
 
-function useInfiniteScroll({
+const useInfiniteScroll = ({
   loading,
   hasNextPage,
   onLoadMore,
   rootMargin,
   disabled,
   delayInMs = DEFAULT_DELAY_IN_MS,
-}: UseInfiniteScrollHookArgs): UseInfiniteScrollHookResult {
+}: UseInfiniteScrollHookArgs): UseInfiniteScrollHookResult => {
   const [ref, { rootRef, isVisible }] = useTrackVisibility({
     rootMargin,
   });
@@ -51,6 +51,6 @@ function useInfiniteScroll({
   }, [onLoadMore, shouldLoadMore, delayInMs]);
 
   return [ref, { rootRef }];
-}
+};
 
 export default useInfiniteScroll;
