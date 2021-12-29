@@ -1,0 +1,18 @@
+import React from "react";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+
+interface Props {
+  label: string;
+}
+
+export const PagListItem = (props: Props) => {
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+
+  return <Item>{props.label}</Item>;
+};
