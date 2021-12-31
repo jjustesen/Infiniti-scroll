@@ -19,7 +19,6 @@ describe("Testing AppBar component", () => {
   it("check function in ThemeButton", () => {
     render(<PagAppBar />);
     const themeButtonLight = screen.getByTestId("button-theme-light");
-    const themeButtonDark = screen.queryByTestId("button-theme-dark");
     fireEvent(
       screen.getByTestId("button-theme-switch"),
       new MouseEvent("click", {
@@ -27,8 +26,6 @@ describe("Testing AppBar component", () => {
         cancelable: true,
       })
     );
-
-    console.log({ affter: themeButtonDark });
 
     expect(themeButtonLight).toBeInTheDocument();
   });
