@@ -36,13 +36,17 @@ export const PagListItem = (props: Props) => {
     return color;
   };
   return (
-    <Item>
+    <Item data-testid="list-item">
       <Avatar sx={{ bgcolor: stringToColor(props.title) }}>
         {props.title.substr(0, 2).toUpperCase()}
       </Avatar>
       <Grid style={{ paddingLeft: "16px" }}>
-        <Typography variant="body1">{props.title}</Typography>
-        <Typography variant="body2">{props.subtitle}</Typography>
+        <Typography data-testid="label-title" variant="body1">
+          {props.title}
+        </Typography>
+        <Typography data-testid="label-subtitle" variant="body2">
+          {props.subtitle}
+        </Typography>
       </Grid>
     </Item>
   );

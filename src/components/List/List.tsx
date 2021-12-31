@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
 import { PagListItem } from ".";
@@ -5,7 +6,9 @@ import { useLoadItems } from "./utils";
 import { useState, useCallback } from "react";
 import { PagListItemLoading } from "./ListItemLoading";
 
-export const PagList = () => {
+interface Props {}
+
+export const PagList = (props: Props) => {
   const [text, setText] = useState<string>("");
   const { loading, items, hasNextPage, error, loadMore, setSearch, setItems } =
     useLoadItems();
@@ -23,13 +26,12 @@ export const PagList = () => {
     setSearch(text);
   }, [setItems, setSearch, text]);
 
-  console.log(items);
-
   return (
     <>
       <Grid>
         <Grid display="flex" p="16px">
           <TextField
+            data-testid="input-search"
             value={text}
             onChange={(event: any) => setText(event.target.value)}
             label="Search"
@@ -39,6 +41,7 @@ export const PagList = () => {
           />
 
           <Button
+            data-testid="button-search"
             sx={{ marginLeft: "16px" }}
             variant="outlined"
             onClick={handleSearch}

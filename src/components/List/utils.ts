@@ -37,7 +37,6 @@ const loadItems = (startCursor = 0, search: string): Promise<Response> => {
           hasNextPage = false;
         }
       }
-      console.log({ newArray });
       resolve({ hasNextPage: hasNextPage, data: newArray });
     }, RESPONSE_TIME_IN_MS);
   });
@@ -62,7 +61,6 @@ export const useLoadItems = () => {
         items.length,
         search
       );
-      console.log(data);
       setItems((current) => [...current, ...data]);
       setHasNextPage(newHasNextPage);
     } catch (err) {

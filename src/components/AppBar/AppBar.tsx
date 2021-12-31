@@ -1,26 +1,29 @@
-import * as React from "react";
+import React, { useCallback, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useTheme } from "@mui/system";
 import { useColorMode } from "providers/theme";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 interface Props {}
 
 export const PagAppBar = (props: Props) => {
-  const theme = useTheme();
+  const [mode, setMode] = useState<boolean>(false);
 
   const { toggleColorMode } = useColorMode();
 
-  console.log(theme);
+  const handleClick = useCallback(() => {
+    setMode(mode!);
+    toggleColorMode();
+  }, [mode, toggleColorMode]);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" data-testid="component-app-bar">
           <Toolbar>
             <IconButton
               size="large"
@@ -35,14 +38,15 @@ export const PagAppBar = (props: Props) => {
               User list
             </Typography>
             <IconButton
+              data-testid="button-theme-switch"
               sx={{ ml: 1 }}
-              onClick={toggleColorMode}
+              onClick={handleClick}
               color="inherit"
             >
-              {theme.palette.mode === "dark" ? (
-                <Brightness7Icon />
+              {mode ? (
+                <Brightness7Icon data-testid="button-theme-dark" />
               ) : (
-                <Brightness4Icon />
+                <Brightness4Icon data-testid="button-theme-light" />
               )}
             </IconButton>
           </Toolbar>

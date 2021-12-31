@@ -14,7 +14,7 @@ export const PagListItemLoading = () => {
   }));
 
   return (
-    <Item>
+    <Item data-testid="loading-list-item">
       <Skeleton variant="circular" width={40} height={40} />
       <Grid style={{ paddingLeft: "16px", width: "100%" }}>
         <Skeleton variant="text" />
